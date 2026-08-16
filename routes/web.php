@@ -3,5 +3,8 @@
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return "welcome To My Portfolio";
+    return "Hello Welcome To My Portfolio, ";
+});
+Route::get('/profile/{name}', function ($name){
+     return "Hello Welcome To My Portfolio," . $name;
 });
