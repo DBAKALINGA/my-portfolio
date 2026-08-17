@@ -55,7 +55,9 @@
 
 
                     <div class="project-links">
-
+                    <a href="{{ route('projects.show', ['slug' => $project['slug']]) }}">
+                        View Details →
+                           </a>
                         <a href="{{ $project['github'] }}"
                            target="_blank">
                             GitHub →

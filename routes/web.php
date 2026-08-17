@@ -12,3 +12,5 @@ Route::get('/profile/{name}', [ProfileController::class, 'show'])->name('profile
 Route::get('/skills', [SkillsController::class, 'index'])->name('skills');
 Route::get('/projects', [ProjectsController::class, 'index'])->name('projects');
 Route::get('/about', [AboutController::class, 'index'])->name('about');
+Route::get('/projects/{slug}', [ProjectsController::class, 'show'])
+    ->name('projects.show');
