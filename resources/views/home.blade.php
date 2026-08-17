@@ -92,16 +92,15 @@
 
         <h2>My Skills</h2>
 
-        <div class="skills-grid">
+    <div class="skills-grid">
 
-            <span>Laravel</span>
-            <span>PHP</span>
-            <span>Java</span>
-            <span>Python</span>
-            <span>JavaScript</span>
-            <span>MySQL</span>
+    @foreach ($skills as $skill)
 
-        </div>
+        <span>{{ $skill }}</span>
+
+    @endforeach
+
+</div>
 
     </div>
 
