@@ -2,8 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\HomeController;
 
-Route::get('/', function () {
-    return "Hello Welcome To My Portfolio, ";
-});
-Route::get('/profile/{name}', [ProfileController::class, 'show']);
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/profile/{name}', [ProfileController::class, 'show'])->name('profile');
