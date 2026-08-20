@@ -25,7 +25,7 @@
             <a href="{{ route('about') }}">About</a>
             <a href="{{ route('skills') }}">Skills</a>
             <a href="{{ route('projects') }}">Projects</a>
-            <a href="#contact">Contact</a>
+            <a href="{{ route('contact.show') }}">Contact</a>
         </div>
 
     </div>
