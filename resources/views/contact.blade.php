@@ -41,4 +41,48 @@
         <button type="submit" class="btn btn-primary">Send Message</button>
     </form>
 </div>
+<div class="my-5 p-4 border rounded bg-light">
+    <h3>Acha Rating au Maoni Yako</h3>
+
+    @if(session('success_rating'))
+        <div class="alert alert-success">
+            {{ session('success_rating') }}
+        </div>
+    @endif
+
+    <form action="{{ route('rating.store') }}" method="POST">
+        @csrf
+        <div class="mb-3">
+            <label class="form-label">Jina Lako</label>
+            <input type="text" name="name" class="form-control" value="{{ old('name') }}">
+            @error('name') <small class="text-danger">{{ $message }}</small> @enderror
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Email</label>
+            <input type="email" name="email" class="form-control" value="{{ old('email') }}">
+            @error('email') <small class="text-danger">{{ $message }}</small> @enderror
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Chagua Stars (1 - 5)</label>
+            <select name="stars" class="form-select">
+                <option value="5">⭐⭐⭐⭐⭐ (5 - Bora Sana)</option>
+                <option value="4">⭐⭐⭐⭐ (4 - Nzuri)</option>
+                <option value="3">⭐⭐⭐ (3 - Wastani)</option>
+                <option value="2">⭐⭐ (2 - Mbaya)</option>
+                <option value="1">⭐ (1 - Mbaya Sana)</option>
+            </select>
+            @error('stars') <small class="text-danger">{{ $message }}</small> @enderror
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Maoni Yako (Review)</label>
+            <textarea name="review" rows="3" class="form-control">{{ old('review') }}</textarea>
+            @error('review') <small class="text-danger">{{ $message }}</small> @enderror
+        </div>
+
+        <button type="submit" class="btn btn-warning">Tuma Rating</button>
+    </form>
+</div>
 @endsection
