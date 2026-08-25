@@ -3,58 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Panel - Portfolio</title>
-    
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- FontAwesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- Custom Admin CSS -->
-    <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
+    <title>@yield('title', 'Admin Dashboard')</title>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body>
+<body class="bg-gray-100 font-sans antialiased">
 
-<div class="container-fluid">
-    <div class="row">
-        <!-- SIDEBAR -->
-        <div class="col-md-3 col-lg-2 sidebar p-3 d-none d-md-block">
-            <h4 class="text-white text-center fw-bold my-3">
-                <i class="fa-solid fa-user-shield me-2"></i>Admin Panel
-            </h4>
-            <hr class="text-secondary">
-            
-            <a href="{{ route('admin.dashboard') }}" class="active"><i class="fa-solid fa-gauge me-2"></i> Dashboard</a>
-            <a href="{{ url('/') }}" target="_blank"><i class="fa-solid fa-globe me-2"></i> View Website</a>
-            
-            <div class="mt-5 pt-5">
+    <div class="flex h-screen overflow-hidden">
+        <!-- SIDEBAR YA ADMIN -->
+        <aside class="w-64 bg-slate-900 text-white flex flex-col justify-between">
+            <div>
+                <div class="p-5 text-xl font-bold border-b border-slate-800 text-blue-400">
+                    Portfolio Admin
+                </div>
+                <nav class="mt-5 space-y-1 px-3">
+                    <a href="{{ route('dashboard') }}" class="block py-2.5 px-4 rounded hover:bg-slate-800 transition">
+                        📊 Dashboard
+                    </a>
+                    <a href="{{ route('admin.projects.index') }}" class="block py-2.5 px-4 rounded hover:bg-slate-800 transition">
+                        🚀 Projects Management
+                    </a>
+                    <a href="{{ route('admin.events.index') }}" class="block py-2.5 px-4 rounded hover:bg-slate-800 transition">
+                    📅 Matukio (Events)
+                    </a>
+                </nav>
+            </div>
+
+            <div class="p-4 border-t border-slate-800">
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
-                    <button type="submit" class="btn btn-danger w-100 fw-bold">
-                        <i class="fa-solid fa-right-from-bracket me-2"></i> Logout
+                    <button type="submit" class="w-full text-left py-2 px-4 bg-red-600 hover:bg-red-700 rounded text-white font-bold transition">
+                        🚪 Logout
                     </button>
                 </form>
             </div>
-        </div>
+        </aside>
 
-        <!-- MAIN CONTENT -->
-        <div class="col-md-9 col-lg-10 main-content">
-            <!-- TOPBAR -->
-            <div class="topbar d-flex justify-content-between align-items-center">
-                <div>
-                    <h3 class="m-0 fw-bold text-dark">Dashboard</h3>
-                    <small class="text-muted">Karibu tena, {{ auth()->user()->name }}</small>
-                </div>
-                <div>
-                    <span class="badge bg-primary p-2"><i class="fa-solid fa-user me-1"></i> Admin Logged In</span>
-                </div>
-            </div>
+        <!-- ENEO KUU LA YALIYOMO (CONTENT) -->
+        <div class="flex-1 flex flex-col overflow-y-auto">
+            <!-- HEADER MPYA YA ADMIN -->
+            <header class="bg-white shadow-sm p-4 flex justify-between items-center border-b">
+                <h1 class="text-xl font-bold text-gray-800">@yield('page_title', 'Admin Panel')</h1>
+                <span class="text-sm font-semibold text-gray-600">Karibu, {{ auth()->user()->name ?? 'Admin' }}</span>
+            </header>
 
-            @yield('content')
+            <!-- MAIN CONTENT -->
+            <main class="p-6">
+                @yield('content')
+            </main>
         </div>
     </div>
-</div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

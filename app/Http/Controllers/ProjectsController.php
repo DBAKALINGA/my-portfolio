@@ -2,85 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Project;
+use App\Models\Event;
+use Illuminate\Http\Request;
+
 class ProjectsController extends Controller
 {
+    /**
+     * Display a listing of projects and events.
+     */
     public function index()
-{
-    $projects = [
-        [
-            'title' => 'My Portfolio',
-            'slug' => 'my-portfolio',
-            'description' => 'A personal developer portfolio built with Laravel and Blade.',
-            'technologies' => ['Laravel', 'PHP', 'Blade', 'CSS'],
-            'github' => 'https://github.com/DBAKALINGA/my-portfolio',
-            'demo' => '#'
-        ],
+    {
+        // Kuchukua projects zote kuanzia mpya zaidi (Latest)
+        $projects = Project::latest()->get();
 
-        [
-            'title' => 'Hostel Management System',
-            'slug' => 'hostel-management-system',
-            'description' => 'A system for managing students, hostel allocation and payments.',
-            'technologies' => ['Spring Boot', 'Java', 'MySQL'],
-            'github' => '#',
-            'demo' => '#'
-        ],
+        // Kuchukua events zote kuanzia mpya zaidi (Latest)
+        $events = Event::latest()->get();
 
-        [
-            'title' => 'Hospital Appointment System',
-            'slug' => 'hospital-appointment-system',
-            'description' => 'A web application for managing hospital appointments.',
-            'technologies' => ['Django', 'Python', 'MySQL'],
-            'github' => '#',
-            'demo' => '#'
-        ],
-    ];
-
-    return view('projects', [
-        'projects' => $projects
-    ]);
-}
-    public function show($slug)
-{
-    $projects = [
-        [
-            'title' => 'My Portfolio',
-            'slug' => 'my-portfolio',
-            'description' => 'A personal developer portfolio built with Laravel and Blade.',
-            'technologies' => ['Laravel', 'PHP', 'Blade', 'CSS'],
-            'github' => 'https://github.com/DBAKALINGA/my-portfolio',
-            'demo' => '#'
-        ],
-
-        [
-            'title' => 'Hostel Management System',
-            'slug' => 'hostel-management-system',
-            'description' => 'A system for managing students, hostel allocation and payments.',
-            'technologies' => ['Spring Boot', 'Java', 'MySQL'],
-            'github' => '#',
-            'demo' => '#'
-        ],
-
-        [
-            'title' => 'Hospital Appointment System',
-            'slug' => 'hospital-appointment-system',
-            'description' => 'A web application for managing hospital appointments.',
-            'technologies' => ['Django', 'Python', 'MySQL'],
-            'github' => '#',
-            'demo' => '#'
-        ],
-    ];
-
-    foreach ($projects as $project) {
-
-        if ($project['slug'] === $slug) {
-
-            return view('project-details', [
-                'project' => $project
-            ]);
-
-        }
+        // Kutuma data kwenda kwenye view ya 'projects.blade.php'
+        return view('projects', compact('projects', 'events'));
     }
-
-    abort(404);
-}
 }
